@@ -1,0 +1,38 @@
+{% extends 'homebase.html'%}
+{% block title %}İletişim{{ setting.company }}{% endblock %}
+{% block keywords %}{{ setting.keywords }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+{% block head %}
+    <link rel="shortcut icon" href="{{ setting.icon.url }}">
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+            <div class="row">
+
+                <div class="col-md-8 padding-right">
+                    {{ setting.contact|safe }}
+                </div>
+                 <div class="col-md-4 padding-right">
+                    <div class="contact-form">
+	    				<h3 class="title text-center">İletişim Formu</h3>
+
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <input type="submit" value="Mesaj Gönder">
+                        </form>
+
+	    			</div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
